@@ -1,3 +1,4 @@
+import { Network } from "../association/network";
 import { Issuer } from "../issuer/issuer";
 import { Holder } from "./holder";
 
@@ -12,7 +13,7 @@ export class Card{
         return Math.floor(Math.random() * 1000).toString()
     }
 
-    constructor(public issuer: Issuer, public holder: Holder){
+    constructor(public readonly network: Network, public readonly issuer: Issuer, public readonly holder: Holder){
         this.cvv = ( '000' + Math.floor(Math.random() * 1000).toString()).substr(-3)
         this.number = this.gen4() + "-" + this.gen4() + "-" + this.gen4() + "-" + this.gen4()
         this.exp = new Date(new Date().setFullYear(new Date().getFullYear() + 5))

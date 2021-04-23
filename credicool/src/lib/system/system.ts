@@ -1,7 +1,13 @@
-import { Acquirer } from "../acquirer/acquirer";
-import { Card } from "../card/card";
-import { Account } from "../merchant/account";
-import { Merchant } from "../merchant/merchant";
+import { Acquirer } from '../acquirer/acquirer';
+import { Network } from '../association/network';
+import { Visa } from '../association/visa';
+import { Card } from '../card/card';
+import { Holder } from '../card/holder';
+import { Issuer } from '../issuer/issuer';
+import { Account } from '../merchant/account';
+import { Merchant } from '../merchant/merchant';
+import { Authorization } from '../payment/authorization';
+import { Transaction } from '../payment/transaction';
 
 export class System{
     private merchants = {} as { [id: string]: Merchant; };
@@ -12,8 +18,8 @@ export class System{
         this.cards = this.seedCards()
     }
 
-    authorizationProcess(): boolean {
-        return false
+    authorizationProcess(card: Card, transaction: Transaction): Authorization {
+        return Authorization
     }
 
     clearing(): boolean {
@@ -26,16 +32,22 @@ export class System{
 
     private seedMerchants(): { [id: string]: Merchant; } {
         return {
-            "business-1": new Merchant(
-                "business-1",
-                new Account("business-1", "account-1"),
-                new Acquirer("acquirer-business-1")
+            'business-1': new Merchant(
+                'business-1',
+                new Account('business-1', 'account-1'),
+                new Acquirer('acquirer-business-1')
             )
         }
     }
 
     private seedCards(): { [id: string]: Card; } {
-        throw new Error('Function not implemented.');
+        return {
+            'card-1': new Card(
+                new Visa('Platinum'),
+                new Issuer('Issuer-1', 1000000),
+                new Holder('holder-1', 'ssn-1', 'holder-1')
+            )
+        }
     }
 
     public get getMerchants() {
