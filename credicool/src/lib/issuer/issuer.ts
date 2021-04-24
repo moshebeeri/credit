@@ -12,7 +12,7 @@ export class Issuer{
         this.obligo = obligo;
     }
 
-    getName() {
+    get Name() {
         return this.name;
     }
     

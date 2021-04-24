@@ -9,7 +9,7 @@ import { System } from '../../lib/system/system';
 export interface SystemState {
   merchants: {[id: string]: Merchant};
   cards: {[id: string]: Card};
-
+  value: number;
   status: 'idle' | 'loading' | 'failed';
 }
 
@@ -17,6 +17,7 @@ const system: System = new System()
 system.seed();
 
 const initialState: SystemState = {
+  value: 0,
   merchants: system.getMerchants,
   cards: system.getCards,
   status: 'idle',
