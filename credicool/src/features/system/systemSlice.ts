@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-import { Acquirer } from '../../lib/acquirer/acquirer';
-import { Card } from '../../lib/card/card';
-import { Account } from '../../lib/merchant/account';
-import { Merchant } from '../../lib/merchant/merchant';
-import { System } from '../../lib/system/system';
+import {Merchant, System, Card} from 'credit_lib'
 
 export interface SystemState {
   merchants: {[id: string]: Merchant};
