@@ -41,7 +41,7 @@ export class Issuer{
         //check card exp 
         const exp = new Date(2000 + parseInt(card.expYear), parseInt(card.expMonth));
 
-        return new Promise<Authorization>((resolve, reject) => {
+        const result = new Promise<Authorization>((resolve, reject) => {
             if (new Date > exp)
                 return reject('expired card')
 

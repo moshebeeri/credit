@@ -2,7 +2,7 @@ import { binding, given, then, when} from 'cucumber-tsflow';
 import { assert } from 'chai';
 
 @binding()
-export class BankAccountSteps {
+export class CreditCardSteps {
   private accountBalance: number = 0;
 
   @given(/A bank account with starting balance of \$(\d*)/)
