@@ -7,3 +7,8 @@ Feature: Credit Card
   Scenario: Create Card With Expiretion Date
     Given card been created for new client 
     Then card expiration year in 5
+
+  Scenario: Charge the creadit card
+    Given a system created for the card
+    Given issuer with balance of $100
+    Then card charge for $100 should succeeded 

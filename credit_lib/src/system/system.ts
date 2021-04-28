@@ -10,8 +10,8 @@ import { Authorization } from '../payment/authorization';
 import { Transaction } from '../payment/transaction';
 
 export class System{
-    private merchants = {} as { [id: string]: Merchant; };
-    private cards = {} as { [id: string]: Card; };
+    private merchants = {} as { [id: string]: Merchant }
+    private cards = {} as { [id: string]: Card }
 
     seed() {
         this.merchants = this.seedMerchants()
@@ -30,7 +30,7 @@ export class System{
         return false
     }
 
-    private seedMerchants(): { [id: string]: Merchant; } {
+    private seedMerchants(): { [id: string]: Merchant } {
         return {
             'business-1': new Merchant(
                 'business-1',
@@ -40,7 +40,7 @@ export class System{
         }
     }
 
-    private seedCards(): { [id: string]: Card; } {
+    private seedCards(): { [id: string]: Card } {
         return {
             'card-1': new Card(
                 new Visa('Platinum'),

@@ -6,8 +6,8 @@ export class Network{
   constructor(public readonly name: String, public readonly type: string) {
   }
 
-  request(card: Card, transaction: Transaction): Authorization {
-    return card.issuer.request(card, transaction)
+ async request(card: Card, transaction: Transaction): Promise<Authorization> {
+    return await card.issuer.request(card, transaction)
   }
 
 }

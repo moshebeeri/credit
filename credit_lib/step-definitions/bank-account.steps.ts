@@ -17,6 +17,6 @@ export class CreditCardSteps {
 
   @then(/The bank account balance should be \$(\d*)/)
   public accountBalanceShouldEqual(expectedAmount: number) {
-    assert.equal(this.accountBalance, expectedAmount);
+    assert.equal(this.accountBalance, expectedAmount)
   }
 }

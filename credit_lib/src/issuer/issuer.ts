@@ -37,7 +37,11 @@ export class Issuer{
         this.obligo = amount;
     }
 
-    async request(card: Card, transaction: Transaction) {
+    get getObligo() {
+        return this.obligo
+    }
+
+    async request(card: Card, transaction: Transaction): Promise<Authorization> {
         //check card exp 
         const exp = new Date(2000 + parseInt(card.expYear), parseInt(card.expMonth));
 
@@ -47,5 +51,6 @@ export class Issuer{
 
             resolve(new Authorization())
         })
+        return result
       }
 }
