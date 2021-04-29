@@ -3,9 +3,11 @@
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "build" : "tsc",
+    "build": "tsc",
     "test": "./node_modules/.bin/cucumber-js -p default"
   },
   "keywords": [],
@@ -20,5 +22,8 @@
     "cucumber-tsflow": "^3.2.0",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333"
-    }
+  },
+  "dependencies": {
+    "simple-statistics": "^7.7.0"
+  }
 }
