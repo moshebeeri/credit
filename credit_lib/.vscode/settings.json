@@ -1,5 +1,13 @@
 {
   "cSpell.words": [
     "stddev"
-  ]
+  ],
+    "cucumberautocomplete.steps": [
+        "step-definitions/**/*.steps.ts"
+    ],
+    "cucumberautocomplete.syncfeatures": "features/**/*feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.strictGherkinValidation": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
 }
