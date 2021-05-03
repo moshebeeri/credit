@@ -6,7 +6,7 @@ import { Issuer } from '../src/issuer/issuer';
 import { Visa } from '../src/association/visa';
 import { System } from '../src/system';
 import { Merchant } from '../src/merchant/merchant';
-import { Transaction } from '../src/payment/transaction';
+import { CardTransaction, Transaction } from '../src/payment/transaction';
 
 @binding()
 export class BankAccountSteps {
@@ -50,8 +50,7 @@ export class BankAccountSteps {
     assert.equal(amount, 100)
     const card: Card = this.system.getCards['card-1']
     const merchant: Merchant = this.system.getMerchants['business-1']
-    const auth = await card.network.request(card, new Transaction(card, merchant, amount))
+    const auth = await card.network.request(card, new CardTransaction().create(card, merchant, amount))
     assert.isNotNull(auth)
-
   }
 }

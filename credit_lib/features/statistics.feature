@@ -3,6 +3,6 @@ Feature: Percentaile
 
   Scenario: check stat lib
     Given you have initialized some statistics 
-    Then you should calculate z-order
+    Then you should calculate percentile value
 
 

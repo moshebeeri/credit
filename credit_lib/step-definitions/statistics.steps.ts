@@ -15,21 +15,15 @@ export class StatisticsSteps {
     this.mean = s.mean(this.data)
   }
 
-
   x(z: number): number {
     return z*this.stddev + this.mean
   }
 
-  @then(/you should calculate z-order/)
-  public calculateZOrder() {
-    // zScore(x: number, mean: number, standardDeviation: number): number
-    assert.equal(s.zScore(78, 80, 5), -0.4)
-    s.cumulativeStdNormalProbability(s.zScore(80, this.mean, this.stddev))
+  @then(/you should calculate percentile value/)
+  public percentileValue() {
     const z: number = s.probit(0.5)
     const x = this.x(z)
-    console.log(x)
-    assert.equal(s.cumulativeStdNormalProbability(-1.22), 0.1112)
-    
+    assert.equal(x, 55)    
   }
 
 }

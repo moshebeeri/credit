@@ -1,4 +1,3 @@
-
 import * as s from 'simple-statistics'
 
 interface Parameter{
@@ -35,4 +34,8 @@ class Percentile implements Parameter {
     const x = this.x(z)
     return value>=x
   }
+}
+
+export {
+  Parameter, Name, Between, GreaterThanOrEqual,Percentile
 }

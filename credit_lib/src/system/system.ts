@@ -4,7 +4,7 @@ import { Visa } from '../association/visa';
 import { Card } from '../card/card';
 import { Holder } from '../card/holder';
 import { Issuer } from '../issuer/issuer';
-import { Account } from '../merchant/account';
+import { Account, AccountType } from '../account';
 import { Merchant } from '../merchant/merchant';
 import { Authorization } from '../payment/authorization';
 import { Transaction } from '../payment/transaction';
@@ -34,7 +34,7 @@ export class System{
         return {
             'business-1': new Merchant(
                 'business-1',
-                new Account('business-1', 'account-1'),
+                new Account('business-1', 'business-1', AccountType.Merchant),
                 new Acquirer('acquirer-business-1')
             )
         }
