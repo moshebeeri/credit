@@ -1,6 +1,7 @@
 import { Card } from "../card/card";
 import { Merchant } from "../merchant/merchant";
 import {Account} from "../account"
+
 enum TransactionType {
     Card     = 1,
     Account  = 2,
@@ -9,6 +10,7 @@ enum TransactionType {
 }
 
 interface Transaction{
+    amount: number
     description: string
     type: TransactionType
     create(...args: any[]): Transaction

@@ -1,6 +1,6 @@
 @ledger
 Feature: Ledger
-  In order to do calculate bucket according to percentailes
+  to do calculate bucket according to percentailes
 
   Scenario: create ledger
     Given you have initialized transactions 

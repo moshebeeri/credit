@@ -48,7 +48,10 @@ export class Issuer{
         const result = new Promise<Authorization>((resolve, reject) => {
             if (new Date > exp)
                 return reject('expired card')
-
+            //check obligo
+            if (this.obligo < transaction.amount)
+                return reject('insufficient funds error')
+            this.useObligo(transaction.amount)
             resolve(new Authorization())
         })
         return result

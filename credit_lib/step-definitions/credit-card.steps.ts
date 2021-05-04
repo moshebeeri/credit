@@ -45,12 +45,28 @@ export class BankAccountSteps {
     expect(this.system.getCards['card-1'].issuer.getObligo).to.be.greaterThanOrEqual(balance)
   }
 
-  @then(/card charge for \$(\d+) should succeeded/)
+  // @then(/card charge for \$(\d+) should succeeded/)
+  // public async charge1(amount: number) {
+  //   assert.equal(amount, 100)
+  //   const card: Card = this.system.getCards['card-1']
+  //   const merchant: Merchant = this.system.getMerchants['business-1']
+  //   const auth = await card.network.request(card, new CardTransaction().create(card, merchant, amount))
+  //   assert.isNotNull(auth)
+  // }
+
+  @when(/card charge for \$(\d+) succeeded/)
   public async charge(amount: number) {
     assert.equal(amount, 100)
     const card: Card = this.system.getCards['card-1']
     const merchant: Merchant = this.system.getMerchants['business-1']
     const auth = await card.network.request(card, new CardTransaction().create(card, merchant, amount))
     assert.isNotNull(auth)
+  }
+
+  @then(/issuer obligo is \$(\d+)/)
+  public async balance(amount: number) {
+    const card: Card = this.system.getCards['card-1']
+    const issuer: Issuer = card.issuer
+    assert.equal(issuer.getObligo,0) 
   }
 }

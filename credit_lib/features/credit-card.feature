@@ -12,8 +12,6 @@ Feature: Credit Card
   Scenario: Charge the creadit card
     Given a system created for the card
     Given issuer with balance of $100
-    Then card charge for $100 should succeeded 
-    # TODO:
-    # When card charge for $100 succeeded
-    # Then issuer balance is $0
+    When card charge for $100 succeeded
+    Then issuer obligo is $0
 
