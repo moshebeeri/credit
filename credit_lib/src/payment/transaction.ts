@@ -1,5 +1,5 @@
-import { Card } from "../card/card";
-import { Merchant } from "../merchant/merchant";
+import { Card } from "../card"
+import { Merchant } from "../merchant"
 import {Account} from "../account"
 
 enum TransactionType {

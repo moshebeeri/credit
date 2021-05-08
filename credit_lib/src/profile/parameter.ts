@@ -11,10 +11,24 @@ class Between implements Parameter {
   }
 }
 
-class GreaterThanOrEqual implements Parameter {
+class GreaterThanOrEquals implements Parameter {
   constructor(private val: number) {}
   match(from: number): boolean {
     return this.val >= from
+  }
+}
+
+class Equals implements Parameter {
+  constructor(private val: number) {}
+  match(val: number): boolean {
+    return this.val == val
+  }
+}
+
+class Value implements Parameter {
+  constructor(private val: number) {}
+  match(val: number): boolean {
+    return this.val == val
   }
 }
 
@@ -37,5 +51,5 @@ class Percentile implements Parameter {
 }
 
 export {
-  Parameter, Name, Between, GreaterThanOrEqual,Percentile
+  Parameter, Name, Between, GreaterThanOrEquals, Equals, Value, Percentile
 }

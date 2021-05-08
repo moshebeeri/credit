@@ -1,6 +1,4 @@
-import { Card } from "../card/card";
 import { InsufficientFundsError } from "../errors/insufficient_funds_error";
-import { Authorization } from "../payment/authorization";
 import { Transaction } from "../payment/transaction";
 
 export class Obligo{

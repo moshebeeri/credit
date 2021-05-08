@@ -39,8 +39,8 @@ export class LedgerSteps {
   @given(/you have initialized transactions/)
   public async createLines() {
     for (let i = 1; i < this.numberOfLines+1; i++) {
-      let fromAccount: Account = new Account('account-1-'+i, 'user-1-'+i, AccountType.Issuer)
-      let toAccount: Account = new Account('account-2-'+i, 'user-2-'+i, AccountType.Issuers)
+      let fromAccount: Account = new Account('account-1-'+i, 'user-1-'+i, 'USD', AccountType.Issuer)
+      let toAccount: Account = new Account('account-2-'+i, 'user-2-'+i, 'USD', AccountType.Issuers)
       let transaction: Transaction = new AccountTransaction().create(fromAccount, toAccount, 100+i)
       let line: Line = new Line(Operation.Deposit, transaction)
      const point = new Point(

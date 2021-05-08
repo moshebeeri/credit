@@ -1,5 +1,4 @@
 import { Issuer } from ".";
-import { Holder } from "../card/holder";
 
 
 export class IssuerObligo {

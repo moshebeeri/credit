@@ -1,8 +1,8 @@
-// import {  Parameter, Name, Between, GreaterThanOrEqual,Percentile} from './parameter'
+// import {  Parameter, Name, Between, GreaterThanOrEquals,Percentile} from './parameter'
 // import {Profile, HolderProfile, IssuerProfile} from './profile'
 
 // export {
-//   Parameter, Name, Between, GreaterThanOrEqual,Percentile,
+//   Parameter, Name, Between, GreaterThanOrEquals,Percentile,
 //   Profile, HolderProfile, IssuerProfile
 // }
 

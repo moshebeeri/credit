@@ -14,6 +14,7 @@ class Account {
   constructor(
     public readonly id: string,
     private readonly userId: string,
+    public readonly currency: string,
     private readonly type: AccountType) {
         this.accountLedger = new Ledger()
   }

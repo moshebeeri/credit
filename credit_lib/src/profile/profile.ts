@@ -3,14 +3,14 @@ import { Parameter } from "./parameter";
 interface Profile {
   name: string
   parameters: [Parameter]
-  values: {[name:string]: any}
   match(profile: Profile): Promise<boolean>
+  // addParameter(parameter: Parameter): Profile
+  // addValue(name: string, value: any): Profile
 }
 
 class HolderProfile implements Profile {
   constructor(public readonly name: string,
-    readonly parameters: [Parameter],
-    readonly values: { [name: string]: any}
+    readonly parameters: [Parameter]
   ) { }
   
   async match(profile: Profile): Promise<boolean> {
@@ -21,9 +21,9 @@ class HolderProfile implements Profile {
 }
 
 class IssuerProfile implements Profile {
+
   constructor(public readonly name: string,
-    readonly parameters: [Parameter],
-    readonly values: { [name: string]: any}
+    readonly parameters: [Parameter]
   ) { }
   
   async match(profile: Profile): Promise<boolean> {

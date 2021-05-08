@@ -1,12 +1,13 @@
 import { binding, given, then, when} from 'cucumber-tsflow';
 import { assert, expect } from 'chai';
 import { Card } from '../src/card/card';
-import { Holder } from '../src/card/holder';
-import { Issuer } from '../src/issuer/issuer';
+import { Holder } from '../src/card';
+import { SingleIssuer } from '../src/issuer';
 import { Visa } from '../src/association/visa';
 import { System } from '../src/system';
 import { Merchant } from '../src/merchant/merchant';
 import { CardTransaction, Transaction } from '../src/payment/transaction';
+import { Obligo } from '../src/issuer';
 
 @binding()
 export class BankAccountSteps {
@@ -18,9 +19,10 @@ export class BankAccountSteps {
   public createCard() {
     this.card =  new Card(
       new Visa('Platinum'),
-      new Issuer('Issuer-1', 1000000),
       new Holder('holder-1', 'ssn-1', 'holder-1')
     )
+    this.card.setIssuer = new SingleIssuer('Issuer-1', 'Issuer-1', 1000000)
+    // this.card.setObligo = 1000
     this.created = new Date()
   }
 
@@ -41,8 +43,8 @@ export class BankAccountSteps {
 
   @given(/issuer with balance of \$(\d+)/)
   public updateIssuerBalance(balance: number) {
-    this.system.getCards['card-1'].issuer.setObligo(balance)
-    expect(this.system.getCards['card-1'].issuer.getObligo).to.be.greaterThanOrEqual(balance)
+    this.system.getCards['card-1'].obligo.setObligo(balance)
+    expect(this.system.getCards['card-1'].obligo.getObligo).to.be.greaterThanOrEqual(balance)
   }
 
   // @then(/card charge for \$(\d+) should succeeded/)
@@ -66,7 +68,7 @@ export class BankAccountSteps {
   @then(/issuer obligo is \$(\d+)/)
   public async balance(amount: number) {
     const card: Card = this.system.getCards['card-1']
-    const issuer: Issuer = card.issuer
-    assert.equal(issuer.getObligo,0) 
+    const obligo: Obligo = card.obligo
+    assert.equal(obligo.getObligo, 0) 
   }
 }

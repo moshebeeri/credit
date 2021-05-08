@@ -1,6 +1,6 @@
 @credit
 Feature: Credit Card
-  In order to do limit card validity
+  In-order to do limit card validity
   any card has expiresion date
   I would like the card to have a 
   future expiration of 5 years from creation
