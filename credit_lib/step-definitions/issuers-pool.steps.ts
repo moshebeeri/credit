@@ -44,13 +44,13 @@ export class IssuersPoolTest {
     this.holderProfile = new HolderProfile('fico', [new Value(650) ] )
     this.holder = new Holder('holder-id-1', 'holder-ssn-1', 'holder-name-1', this.holderProfile)
     this.card = new Card(new Visa('Platinum'), this.holder)
-    // this.card.setIssuer = this.pool
+    this.card.setIssuer = this.pool
     assert.equal(this.card.obligo.getObligo, 0)
   }
 
   @given(/you allocate obligo to card and holder from pool by amount of \$(\d+)/)
   public allocateObligo(obligo: number) {
-    this.pool.addHolder(this.holder, obligo)
+    this.pool.addCard(this.card, obligo)
     assert.equal(this.card.obligo.getObligo, obligo)
   }
 
@@ -63,14 +63,18 @@ export class IssuersPoolTest {
 
   @then(/you should have \$(\d+) left obligo/)
   public validate(left: number) {
-    assert.equal(this.pool.getObligo, left)
+    assert.equal(this.card.obligo.getObligo, left)
   }
   
   @then(/another charge for \$(\d+) should fail/)
   public async secondCharge(amount: number) {
     const merchant: Merchant = this.system.getMerchants['business-1']
-    expect(await this.card.network.request(this.card, new CardTransaction().create(this.card, merchant, amount))).
-      to.throw(new Error('Property does not exist in model schema.'));
-
+    let t = new CardTransaction().create(this.card, merchant, amount)
+    try {
+      const auth = await this.card.issuer.request(this.card, t)
+      assert(false)
+    } catch (e) {
+      assert.equal(e, 'insufficient funds error')
+    }
   }
 }

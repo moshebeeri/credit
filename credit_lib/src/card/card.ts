@@ -8,7 +8,7 @@ export class Card{
     expMonth: string
     expYear: string
     cvv: string
-    obligo = {} as Obligo
+    obligo: Obligo
     issuer =  {} as Issuer 
 
     gen4 = () => {
@@ -21,6 +21,7 @@ export class Card{
         this.exp = new Date(new Date().setFullYear(new Date().getFullYear() + 5))
         this.expMonth = new Intl.DateTimeFormat('en-US', { month: '2-digit', }).format(this.exp)
         this.expYear = new Intl.DateTimeFormat('en-US', { year: '2-digit' }).format(this.exp)
+        this.obligo = new Obligo(0)
     }
     
     set setObligo(obligo: Obligo) {

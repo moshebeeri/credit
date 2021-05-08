@@ -25,7 +25,7 @@ export class Obligo{
         this.obligo += amount;
     }
 
-    setObligo(amount: number){
+    set setObligo(amount: number){
         this.obligo = amount;
     }
 
@@ -34,7 +34,6 @@ export class Obligo{
     }
 
     async withdraw(transaction: Transaction): Promise<number> {
-
         const result = new Promise<number>((resolve, reject) => {
             //check obligo
             if (this.obligo < transaction.amount)
@@ -43,5 +42,12 @@ export class Obligo{
             resolve(this.obligo)
         })
         return result
+    }
+    
+    cavWithdraw(transaction: Transaction): boolean {
+        if (this.obligo < transaction.amount)
+         return false
+        return true
       }
+
 }

@@ -43,7 +43,7 @@ export class BankAccountSteps {
 
   @given(/issuer with balance of \$(\d+)/)
   public updateIssuerBalance(balance: number) {
-    this.system.getCards['card-1'].obligo.setObligo(balance)
+    this.system.getCards['card-1'].obligo.setObligo = balance
     expect(this.system.getCards['card-1'].obligo.getObligo).to.be.greaterThanOrEqual(balance)
   }
 

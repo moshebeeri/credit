@@ -9,6 +9,7 @@ export class IssuersPool implements Issuer{
   name: string;
   obligo: Obligo
   holders: { [holderId: string]: HolderObligo } = {}
+  cards: { [cardNumber: string]: Card } = {}
   pool: { [issuerId: string]: IssuerObligo } = {}
 
   constructor(public readonly id: string, name: string, private readonly profile: Profile) {
@@ -22,27 +23,35 @@ export class IssuersPool implements Issuer{
   
   async request(card: Card, transaction: Transaction): Promise<Authorization> {
       //check card exp 
+
       const exp = new Date(2000 + parseInt(card.expYear), parseInt(card.expMonth));
 
-      const result = new Promise<Authorization>((resolve, reject) => {
-          if (new Date > exp)
-              return reject('expired card')
-          //check obligo
-          if (this.obligo.withdraw(transaction))
-              return resolve(new Authorization())
-          return reject('insufficient funds error')
+      const result = new Promise<Authorization>(async (resolve, reject) => {
+        if (new Date > exp)
+            return reject('expired card')
+        //check obligo
+        try {
+          await card.obligo.withdraw(transaction)
+          return resolve(new Authorization())
+        }
+        catch (e) {
+          return reject('insufficient funds error')  
+        }
       })
       return result
     }
 
-  addHolder(holder: Holder, obligo: number) {
-    if (this.holders[holder.id])
-      throw new AlreadyExistError('User with id ' + holder.id + ' already exist in this pool')
+  addCard(card: Card, obligo: number) {
+    if (this.holders[card.holder.id])
+      throw new AlreadyExistError('User with id ' + card.holder.id + ' already exist in this pool')
     try {
       this.obligo.useObligo(obligo)
-      this.holders[holder.id] = new HolderObligo(holder, obligo)
+      this.holders[card.holder.id] = new HolderObligo(card.holder, obligo)
+      this.cards[card.number] = card
+      card.obligo.setObligo = obligo
+
     } catch (e) {
-      throw new InsufficientFundsError('Insufficient obligo while adding holder ' + holder.id)
+      throw new InsufficientFundsError('Insufficient obligo while adding holder ' + card.holder.id)
     }
   }
 
@@ -67,7 +76,7 @@ export class IssuersPool implements Issuer{
   addIssuer(issuer: Issuer, obligo: number) {
     if (this.pool[issuer.id])
       throw new AlreadyExistError('Issuer with id ' + issuer.id + ' already exist in this pool')
-      this.obligo.addObligo(obligo)
+    this.obligo.addObligo(obligo)
     this.pool[issuer.id] = new IssuerObligo(issuer, obligo)
   }
 
