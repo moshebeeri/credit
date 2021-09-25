@@ -9,6 +9,7 @@ import { CardTransaction } from '../src/payment/transaction';
 import { GreaterThanOrEquals, HolderProfile, IssuerProfile,  Parameter, Profile, Value } from '../src/profile';
 import { System } from '../src/system';
 
+
 @binding()
 export class IssuersPoolTest {
   system: System
@@ -70,11 +71,16 @@ export class IssuersPoolTest {
   public async secondCharge(amount: number) {
     const merchant: Merchant = this.system.getMerchants['business-1']
     let t = new CardTransaction().create(this.card, merchant, amount)
-    try {
-      const auth = await this.card.issuer.request(this.card, t)
-      assert(false)
-    } catch (e) {
-      assert.equal(e, 'insufficient funds error')
-    }
+    // see https://stackoverflow.com/questions/31845329/testing-rejected-promise-in-mocha-chai/37222388
+    this.card.issuer.request(this.card, t)
+      .then((m) => { throw new Error('should not succeed') })
+      .catch((m)=> {expect(m).to.equal('insufficient funds error')})
+    
+    // try {
+    //   const auth = await this.card.issuer.request(this.card, t)
+    //   assert(false)
+    // } catch (e) {
+    //   assert.equal(e, 'insufficient funds error')
+    // }
   }
 }

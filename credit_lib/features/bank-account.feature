@@ -1,6 +1,6 @@
 @SW
 Feature: Bank Account
-  to do save money
+  In-order to do save money
   As a responsible adult
   I want to store by money in a bank account
 

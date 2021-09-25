@@ -8,7 +8,7 @@ enum AccountType {
   Network   = 5,
   Affiliate = 6
   }
-  
+
 class Account {
   accountLedger: Ledger
   constructor(
@@ -20,7 +20,7 @@ class Account {
   }
   get leger() {
     return this.accountLedger
-}
+  }
 }
 
 export { Account, AccountType }
